@@ -5,8 +5,9 @@ import Date from "../components/date";
 import utilStyles from "../styles/utils.module.css";
 import { getSortedPostsData } from "../lib/posts";
 import { useEffect } from "react";
+import { GetStaticProps } from "next";
 
-export async function getStaticProps() {
+export  const getStaticProps:GetStaticProps  = async() => {
   const allPostsData = getSortedPostsData();
   return {
     props: {
@@ -14,10 +15,13 @@ export async function getStaticProps() {
     },
   };
 }
-export default function Home({ allPostsData }) {
-  useEffect(() => {
-    console.log(allPostsData);
-  });
+export default function Home({ allPostsData }: {
+  allPostsData: {
+    date: string
+    title: string
+    id: string
+  }[]
+}) {
 
   return (
     <Layout home>
